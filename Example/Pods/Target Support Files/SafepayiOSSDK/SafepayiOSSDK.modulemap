@@ -1,0 +1,6 @@
+framework module SafepayiOSSDK {
+  umbrella header "SafepayiOSSDK-umbrella.h"
+
+  export *
+  module * { export * }
+}

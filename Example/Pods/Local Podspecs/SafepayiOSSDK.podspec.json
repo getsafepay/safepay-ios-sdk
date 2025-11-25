@@ -1,0 +1,37 @@
+{
+  "name": "SafepayiOSSDK",
+  "version": "0.1.0",
+  "summary": "A short description of SafepayiOSSDK.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/Irfan Gul/SafepayiOSSDK",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "Irfan Gul": "irfangul92@gmail.com"
+  },
+  "source": {
+    "git": "https://github.com/Irfan Gul/SafepayiOSSDK.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "12.0"
+  },
+  "source_files": "SafepayiOSSDK/Classes/**/*",
+  "resource_bundles": {
+    "SafepayiOSSDK": [
+      "SafepayiOSSDK/Resources/*.png",
+      "SafepayiOSSDK/Resources/Images.xcassets"
+    ]
+  },
+  "vendored_frameworks": "SafepayiOSSDK/Resources/CardinalMobile.xcframework",
+  "dependencies": {
+    "Alamofire": [
+      "~> 5.0"
+    ],
+    "FlagPhoneNumber": [
+      "~> 0.8.0"
+    ]
+  }
+}

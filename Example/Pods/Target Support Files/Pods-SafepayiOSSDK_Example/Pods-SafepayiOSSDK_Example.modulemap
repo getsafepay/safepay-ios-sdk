@@ -1,0 +1,6 @@
+framework module Pods_SafepayiOSSDK_Example {
+  umbrella header "Pods-SafepayiOSSDK_Example-umbrella.h"
+
+  export *
+  module * { export * }
+}
