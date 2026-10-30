@@ -12,8 +12,7 @@ enum Environment {
         case .sandbox:
             return "https://sandbox.api.getsafepay.com"
         case .production:
-            return "https://sandbox.api.getsafepay.com"
+            return "https://api.getsafepay.com"
         }
     }
 }
-

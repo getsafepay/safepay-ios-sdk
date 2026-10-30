@@ -123,10 +123,14 @@ public final class SafepayCardFieldView: UIView, ValidityUpdateDelegate {
     }
 
     private func emitChange() {
-        cardChangeHandler?(buildDetails())
+        cardChangeHandler?(buildDetails(includeSensitiveData: dangerouslyGetFullCardDetails))
     }
 
-    private func buildDetails() -> SafepayCardFieldDetails {
+    func currentCardDetails(includeSensitiveData: Bool = false) -> SafepayCardFieldDetails {
+        buildDetails(includeSensitiveData: includeSensitiveData)
+    }
+
+    private func buildDetails(includeSensitiveData: Bool) -> SafepayCardFieldDetails {
         let numberText = cardNumberField.text ?? ""
         let cleanedNumber = numberText.replacingOccurrences(of: " ", with: "")
         let last4 = cleanedNumber.count >= 4 ? String(cleanedNumber.suffix(4)) : nil
@@ -144,8 +148,8 @@ public final class SafepayCardFieldView: UIView, ValidityUpdateDelegate {
 
         let brand = cardNumberField.cardProvider.description
 
-        let number = dangerouslyGetFullCardDetails ? cleanedNumber : nil
-        let cvc = dangerouslyGetFullCardDetails ? cvcField.text : nil
+        let number = includeSensitiveData ? cleanedNumber : nil
+        let cvc = includeSensitiveData ? cvcField.text : nil
 
         return SafepayCardFieldDetails(
             last4: last4,

@@ -8,7 +8,7 @@ class APIClient {
     private let baseURL: String
     var authToken: String?
     
-    private init(environment: Environment) {
+    init(environment: Environment) {
         self.baseURL = environment.baseURL
     }
     
