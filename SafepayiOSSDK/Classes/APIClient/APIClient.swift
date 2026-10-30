@@ -4,11 +4,12 @@ import Alamofire
 
 class APIClient {
     static let shared = APIClient(environment: Constants.currentEnvironment)
-    static let debug = true
+    // Logs full request/response bodies, including raw card data. Never enable in shipped builds.
+    static let debug = false
     private let baseURL: String
     var authToken: String?
     
-    private init(environment: Environment) {
+    init(environment: Environment) {
         self.baseURL = environment.baseURL
     }
     
