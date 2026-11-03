@@ -80,7 +80,7 @@ final class CheckoutViewController: UIViewController {
 
 `SafepayCardCaptureController` also has `fetchValidity()`, `focus()`, `blur()` and `clear()`.
 
-`SafepayCardFieldView` can also be used on its own when you only need the input and its validation state. `cardChangeHandler` doesn't include the card number or CVC unless you set `dangerouslyGetFullCardDetails = true`. Avoid that: handling raw card data brings your app into PCI DSS scope.
+`SafepayCardFieldView` can also be used on its own when you only need the input and its validation state. The card number and CVC are never exposed to your app, which keeps raw card data out of it.
 
 For React Native, use [`@sfpy/react-native`](https://github.com/getsafepay/sfpy-react-native), which wraps this controller.
 
