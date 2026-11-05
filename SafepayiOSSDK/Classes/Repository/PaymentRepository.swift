@@ -19,10 +19,12 @@ class PaymentRepository {
         return try await self.apiClient.get(endpoint: endpoint, headers: ["Authorization" : "Bearer \(timeBasedToken)"])
     }
     
-    func payerAuthenticationSetup(trackToken: String, paymentMethod: CardPaymentMethod) async throws -> TrackPaymentResponse {
+    /// `isMobile: true` returns a `cardinal_jwt` for the native Cardinal SDK; `nil` omits the flag and returns
+    /// the web device data collection `access_token` and URL.
+    func payerAuthenticationSetup(trackToken: String, paymentMethod: CardPaymentMethod, isMobile: Bool? = true) async throws -> TrackPaymentResponse {
         let endpoint = "order/payments/v3/\(trackToken)"
-        
-        let request = TrackPaymentRequest(action: "PAYER_AUTH_SETUP", entryMode: paymentMethod.entryMode, payload: PayloadData(paymentMethod: paymentMethod, isMobile: true))
+
+        let request = TrackPaymentRequest(action: "PAYER_AUTH_SETUP", entryMode: paymentMethod.entryMode, payload: PayloadData(paymentMethod: paymentMethod, isMobile: isMobile))
         
         return try await self.apiClient.post(endpoint: endpoint, body: request)
     }
@@ -73,7 +75,7 @@ struct EmptyRequest: Encodable {
 
 struct PayloadData: Encodable {
     let paymentMethod: CardPaymentMethod
-    let isMobile: Bool
+    let isMobile: Bool?
     
     enum CodingKeys: String, CodingKey {
         case isMobile = "is_mobile"
@@ -411,10 +413,13 @@ struct StatusData: Decodable {
 public struct ErrorResponse: Error , Decodable {
     let data: String?
     let status: StatusData?
-    let code: String?
-    let message: String?
+    public let code: String?
+    public let message: String?
     
-    var errorMessage: String {
+    public var errorMessage: String {
+        if let detail = status?.errors.first, !detail.isEmpty {
+            return detail
+        }
         return status?.message ?? message ?? PaymentError.generalPaymentError().message
     }
 }

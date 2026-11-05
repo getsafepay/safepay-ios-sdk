@@ -12,17 +12,17 @@ import Foundation
 // Custom Error class
 public class PaymentError: Error {
     // Properties
-    var code: String?
-    var message: String
+    public let code: String?
+    public let message: String
     
     // Initializer
-    init(code: String? = nil, message: String) {
+    public init(code: String? = nil, message: String) {
         self.code = code
         self.message = message
     }
     
     // Function to get a formatted error description
-    func formattedError() -> String {
+    public func formattedError() -> String {
         return "Error: \(code ?? "") \(message)"
     }
     
@@ -50,5 +50,8 @@ public class PaymentError: Error {
     static func invalidTrackerState() -> PaymentError {
         return PaymentError(code: "PT-1001", message: "It appears that your payment tracker has already been started or completed. Please contact support.")
     }
-}
 
+    static func invalidCardDetails() -> PaymentError {
+        return PaymentError(code: "PT-1002", message: "Card details are incomplete or invalid. Please check the entered card details and try again.")
+    }
+}
