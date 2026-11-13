@@ -57,6 +57,7 @@ class CreditCardTextField: CustomTextField, UITextFieldDelegate {
         super.setupTextField()
         self.keyboardType = .numberPad
         self.delegate = self
+        self.placeholder = "Card number"
         setupRightView()
     }
 
